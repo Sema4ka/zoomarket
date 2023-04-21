@@ -1,0 +1,136 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap");
+body {
+  height: 9999px;
+  margin: 0;
+  font-family: "Montserrat", sans-serif;
+}
+
+.light {
+  font-weight: 400;
+}
+
+.medium {
+  font-weight: 500;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #EF800B;
+  position: sticky;
+  top: 0;
+  height: 84px;
+  padding-left: 20%;
+  padding-right: 20%;
+  width: 60%;
+  z-index: 1;
+}
+.nav .nav-buttons {
+  display: flex;
+  justify-content: space-around;
+  flex-grow: 4;
+}
+.nav .nav-buttons button {
+  background-color: rgba(0, 0, 0, 0);
+  font-weight: 600;
+  font-size: 16;
+  border: 0;
+  color: #fff;
+}
+.nav .nav-buttons button:hover {
+  color: #c2c2c2;
+}
+.nav .logo {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+}
+.nav .logo img {
+  padding: 10px;
+  padding-right: 30px;
+}
+.nav .logo .logo-text {
+  font-family: "Montserrat", sans-serif;
+  font-weight: bold;
+  font-size: 2.5em;
+  color: white;
+}
+.nav .logo .logo-text img {
+  position: relative;
+  top: 20px;
+  right: 60px;
+}
+.nav .tech-buttons {
+  margin-left: 40px;
+  flex-grow: 2;
+}
+.nav .tech-buttons img {
+  margin: 0 15px;
+}
+
+.popular-staff {
+  font-size: 24px;
+}
+.popular-staff #left {
+  transform: rotate(0.5turn);
+}
+.popular-staff .tile-header {
+  color: #7DA0AF;
+  font-size: 36px;
+  text-align: center;
+  margin: 5% 0;
+}
+.popular-staff .heart {
+  width: 35px;
+  height: 35px;
+  float: right;
+  margin: 10px 10px;
+}
+.popular-staff img {
+  display: inline-block;
+}
+.popular-staff .popular-cards {
+  display: flex;
+  row-gap: 30px;
+  -moz-column-gap: 80px;
+       column-gap: 80px;
+  height: auto;
+  width: 70%;
+  margin: 0px auto;
+}
+.popular-staff .popular-cards .popular-card {
+  border: 1px solid #FF8300;
+  box-shadow: 0 0 3px #FF8300;
+  border-radius: 20px;
+  flex-grow: 2;
+  height: 250px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 24px;
+}
+.popular-staff .popular-cards .popular-card .card-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 3fr 1fr;
+  padding: 20px 10px;
+  row-gap: 20px;
+  -moz-column-gap: 20px;
+       column-gap: 20px;
+}
+.popular-staff .popular-cards .popular-card .card-content .price {
+  text-align: center;
+}
+.popular-staff .popular-cards .popular-card .card-content button {
+  border: 0;
+  background-color: #74ACD9;
+  color: white;
+  font-size: 20px;
+  width: 100%;
+  border-radius: 20px;
+  margin: 0px auto;
+  height: 40px;
+}/*# sourceMappingURL=style.css.map */
