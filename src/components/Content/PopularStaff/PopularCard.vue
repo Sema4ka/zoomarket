@@ -1,7 +1,12 @@
 <script>
-import { stringifyQuery } from 'vue-router';
 
 export default{
+    data(){
+        return{
+            isLiked: false,
+            isCarted: false,
+        }
+    },
     props:{
         cardData:{
             type: Object,
@@ -14,6 +19,8 @@ export default{
         },
         addToCart(){
             if(localStorage['cart']!=undefined){
+                this.cardData.isCarted = true;
+                var data = this.cardData;
                 const cart = JSON.parse(localStorage['cart']);
                 cart.push(this.cardData);
                 localStorage.setItem('cart', JSON.stringify(cart));
@@ -21,7 +28,17 @@ export default{
             else{
                 localStorage['cart'] = JSON.stringify([this.cardData]);
             }
-        }
+            this.$emit("addToCart");
+        },
+        removeFromCart(){
+            if(localStorage['cart']!=undefined){
+                this.cardData.isCarted = false;
+                var cart = JSON.parse(localStorage['cart']);
+                cart = cart.filter((el)=> el.body!=this.cardData.body);
+                localStorage.setItem('cart', JSON.stringify(cart));
+            }
+            this.$emit("removeFromCart");
+            }
     },
     computed:{
         price(){
@@ -32,14 +49,16 @@ export default{
 </script>
 <template>
 <div class="popular-card">
-    <img class="heart" src="@/assets/Content/PopularStaff/heart.svg"/>
+    <img class="heart" v-if="!cardData.isLiked" @click="cardData.isLiked=true" src="@/assets/Content/PopularStaff/heart.png"/>
+    <img class="heart" v-if="cardData.isLiked" @click="cardData.isLiked=false" src="@/assets/Content/PopularStaff/like.png"/>
     <div class="card-content">
         <img :src="cardData.thumbnailUrl"/>
         <span class="card-text">
             <div class="text-name medium">{{ cardData.title.slice(0,20)}}</div>
             <div class="text-name">{{ cardData.body.slice(0,35)}}</div>
         </span>
-        <button @click="addToCart">В корзину</button>
+        <button v-if="!cardData.isCarted" @click="addToCart">В корзину</button>
+        <button v-if="cardData.isCarted" @click="removeFromCart">Из корзины</button>
         <div class="price bold">{{price}}</div>
     </div>
 </div>
@@ -52,6 +71,11 @@ export default{
   height: 35px
   float: right
   margin: 10px 10px
+  margin-left: -100px 
+  filter: invert(0.5) sepia(1) saturate(5) hue-rotate(330deg)
+  &:hover
+    cursor: pointer
+    filter: invert(0.5) sepia(1) saturate(5) hue-rotate(290deg)
 
 img
   display: inline-block
@@ -89,5 +113,6 @@ img
         font-size:20px
         border-radius:20px
         height: 80%
+        width: 150px
         cursor: pointer
 </style>

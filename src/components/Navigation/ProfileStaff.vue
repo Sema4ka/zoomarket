@@ -11,4 +11,6 @@
 
 img 
     margin: 0 15px
+    &:hover
+        cursor: pointer
 </style>

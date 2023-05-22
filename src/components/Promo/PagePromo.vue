@@ -1,4 +1,29 @@
-<script setup>
+<script>
+import emailjs from 'emailjs-com';
+
+export default{
+    data(){
+        return {
+            email:'',
+        }
+    },
+    computed:{
+        promo(){
+            return Math.floor(Math.random() * (10000 - 0 + 1) + 0);
+        }
+    },  
+    methods:{
+        sendMail(){
+            try{
+                console.log("bfbrjbj");
+                emailjs.send("service_pnupkf2","template_gnuxkuu",{to_email:this.email,promo:this.promo},'_NXHlnSmy6rMqo5ox');
+            }
+            catch(e){
+                console.log(e);
+            }
+        }
+    }
+}
 </script>
 <template>
     <div class="promo">
@@ -9,8 +34,8 @@
             </span>
             <form @submit.prevent class="form">
                 <dev class="header bold">Промокод на скидку 10%</dev>
-                <input type="text" placeholder="Введите почту"/>
-                <button type="submit">Получить скидку</button>
+                <input v-model="email" type="text" placeholder="Введите почту"/>
+                <button @click="sendMail" type="submit">Получить скидку</button>
             </form>
         </div>
     </div>
@@ -20,15 +45,8 @@
 .promo-content
     transform: translate(0,0)    
 .promo
-    width: 100%
     min-height:930px
     background-image: url("@/assets/Promo/cat2.png")
-    background-repeat: no-repeat
-    background-size: cover
-
-.cat
-    transform: translate(27%, -40%)
-    z-index: 0
 
 .form
     position: relative

@@ -1,15 +1,19 @@
 <script>
 import PopularCard from './PopularCard.vue';
-import axios from 'axios';
 export default{
     components:{
         PopularCard
     },
+    props:{
+            popularCards:{
+            type: Array,
+            default: [],
+            required: true,
+        }
+    },
     data(){
         return{
             currentIndex: 0,
-            popularCards:[],
-            pics:[],
         }
     },
     computed:{
@@ -17,14 +21,12 @@ export default{
             return this.popularCards.length-1;
         },
     },
-    watch:{
-        popularCards(){
-            this.popularCards.sort(() => Math.random() - 0.5);
-        }
-    },
-    mounted(){
-        this.fetchCards();
-    },
+    // watch:{
+    //     popularCards(){
+    //         this.popularCards.sort(() => Math.random() - 0.5);
+    //     }
+    // },
+
 
     methods:{
         moveRight(){
@@ -40,23 +42,11 @@ export default{
             else
                 this.currentIndex = this.countOfStaff-1;
         },
-        async fetchCards(){
-            try{
-                const response = await axios.get('https://jsonplaceholder.typicode.com/posts?_limit=10');
-                const picResponse = await axios.get('https://jsonplaceholder.typicode.com/photos?_limit=10');
-                this.popularCards = response.data;
-                this.pics = picResponse.data;
-                this.popularCards.forEach(el => Object.assign(el,this.pics[el.id]));
-            }
-            catch(e){
-                alert(e);
-            }
-        }
+
     }
 }
 </script>
 <template>
-    <div class="tile-header">Популярные товары</div>
     <div class="popular-staff">
         <img @click="moveLeft" src="@/assets/Content/PopularStaff/arrow.svg"/>
         <div class="wrapper">
@@ -65,8 +55,7 @@ export default{
             class="popular-cards">
                 <PopularCard 
                 v-for="post in popularCards"
-                :cardData="post"
-                >
+                :cardData="post">
                 </PopularCard> 
             </div>
         </div>
@@ -100,14 +89,6 @@ export default{
   width: 100%
   transition: all ease .5s 
 
-
-
-
-.tile-header
-  color:#7DA0AF 
-  font-size:36px
-  text-align: center
-  margin: 5% 0
 
 
 </style>

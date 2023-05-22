@@ -1,5 +1,10 @@
-<script setup>
+<script>
 import Button from "../Universal/UniversalButton.vue" 
+export default{
+  components:{
+    Button
+  }
+}
 </script>
 <template>
 <div class="header">
